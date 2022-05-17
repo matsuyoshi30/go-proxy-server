@@ -34,6 +34,14 @@ func (h *proxyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	io.Copy(w, resp.Body)
 }
 
+// Usage
+// Terminal1:
+//     go run main.go
+// Terminal2:
+//     curl -H 'Host: <want to access Host without scheme>' localhost:8081/<want to access endpoint>
+//   example)
+//      curl -H 'Host: example.com' localhost:8081
+
 func main() {
 	ph := newProxyHandler(http.DefaultTransport.(*http.Transport))
 	server := &http.Server{
